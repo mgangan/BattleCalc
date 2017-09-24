@@ -3,11 +3,7 @@
 #include "Model.h"
 
 #include <vector>
-
-void dump( const Model& m )
-{
-	printf( "\n Model: %s", m.toString().c_str() );
-}
+#include <ctime>
 
 void TestProfileChoice()
 {
@@ -19,12 +15,19 @@ void TestProfileChoice()
 	std::vector<Profile> profiles = { p1, p2, p3, p4 };
 	Model m( profiles );
 
-	dump( m );
+	m.dump();
 }
 
+void init()
+{
+	std::srand( unsigned( std::time( 0 ) ) );
+}
 
 int main()
 {
+	init();
+
+
 	TestProfileChoice();
 
 	printf( "\n\nEnd" );

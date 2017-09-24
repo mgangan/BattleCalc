@@ -36,25 +36,46 @@ unsigned int Model::GetCurrentHealth()
 	return m_healthLeft;
 }
 
+int Model::RollToHit() const
+{
+	// todo: implement (after weapons are added)
+	return 0;
+}
+
+std::vector<Wound> Model::RollToWound( unsigned int toughness ) const
+{
+	// todo: implement
+	std::vector<Wound> wounds;
+	return wounds;
+}
+
 //=================================================
 
-std::string Model::toString() const
+std::string Model::toString( bool skipNotCurrentProfiles ) const
 {
 	std::string resStr = "";
 
 	resStr += "\nCurrent health: ";
 	resStr += std::to_string( m_healthLeft );
 
-	resStr += "\nProfiles info:";
-	int num = 0;
-	for ( auto&& profile : m_profiles )
+	if ( ! skipNotCurrentProfiles )
 	{
-		resStr += "\nProfile ";
-		resStr += std::to_string( num++ );
-		resStr += " health = ";
-		resStr += std::to_string( profile.GetHealth() );
+		resStr += "\nProfiles info:";
+		int num = 0;
+		for ( auto&& profile : m_profiles )
+		{
+			resStr += "\nProfile ";
+			resStr += std::to_string( num++ );
+			resStr += " health = ";
+			resStr += std::to_string( profile.GetHealth() );
+		}
 	}
 
 	return resStr;
+}
+
+void Model::dump( bool full ) const
+{
+	printf( "\n Model: %s", toString( ! full ).c_str() );
 }
 

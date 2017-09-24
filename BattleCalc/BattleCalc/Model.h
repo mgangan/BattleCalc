@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ModelProfile.h"
+#include "Wound.h"
 #include <vector>
 #include <string>
 
@@ -13,8 +14,12 @@ public:
 	Profile GetCurrentProfile();
 	unsigned int GetCurrentHealth();
 
+	int RollToHit() const;
+	std::vector<Wound> RollToWound( unsigned int toughness ) const;
+
 // helpers:
-	std::string toString() const;
+	std::string toString( bool skipNotCurrentProfiles = false ) const;
+	void Model::dump( bool full = false ) const;
 
 private:
 	void init();
@@ -22,4 +27,5 @@ private:
 private:
 	std::vector<Profile> m_profiles;
 	unsigned int m_healthLeft;
+	// todo: add weapons
 };
