@@ -1,0 +1,53 @@
+
+enum WEAPON_TYPE
+{
+	WT_HEAVY = 0,
+	WT_ASSAULT,
+	WT_RAPID,
+};
+
+struct WeaponProfile
+{
+	unsigned int m_range;
+	WEAPON_TYPE m_type;
+	unsigned int m_attacksCount;
+	unsigned int m_strength;
+	int m_ap;
+	unsigned int m_damage;
+};
+
+class Weapon
+{
+public:
+	Weapon(){}
+
+	std::vector<WeaponProfile> GetProfiles() const { return m_profiles; }
+	WeaponProfile GetCurrentProfile() const { return m_currentProfile; }
+	unsigned int GetAttacksCount() const { return m_currentProfile.m_attacksCount; }
+	unsigned int GetStrength() const { return m_currentProfile.m_strength; }
+	unsigned int GetAP() const { return m_currentProfile.m_ap; }
+	unsigned int GetDamage() const { return m_currentProfile.m_damage; }
+
+private:
+	std::vector<WeaponProfile> m_profiles;
+
+	WeaponProfile m_currentProfile;
+};
+
+
+unsigned int checkToWound( unsigned int strength, unsigned int toughness )
+{
+	if ( strength == toughness )
+		return 4;
+
+	if ( strength >= toughness * 2 )
+		return 2;
+
+	if ( strength * 2 <= toughness )
+		return 6;
+
+	if ( strength > toughness )
+		return 3;
+
+	return 5;
+}
