@@ -1,15 +1,19 @@
 
-enum RANGED_WEAPON_TYPE
+enum WEAPON_TYPE
 {
 	WT_HEAVY = 0,
 	WT_ASSAULT,
 	WT_RAPID,
 	WT_GRENADE,
 	WT_PISTOL,
+
+	WT_MELEE,
 };
 
 struct WeaponProfile
 {
+	bool IsMelee() { return m_type == WT_MELEE; }
+
 	unsigned int m_range;
 	WEAPON_TYPE m_type;
 	unsigned int m_attacksCount;
